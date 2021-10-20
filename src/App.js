@@ -48,6 +48,7 @@ export default function App(props) {
         getFirebase={props.getFirebase}
         history={props.history}
       />
+      {process.env.REACT_APP}
     </div>
   );
 }
