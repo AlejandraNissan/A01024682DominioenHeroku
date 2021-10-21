@@ -6,6 +6,7 @@ import utilsFunctions from "./funciones/FirebaseFunctions";
 export default function App(props) {
   //console.log("props-> App");
   //console.log(props);
+  //
 
   const { firebase, currentUser, getCurrentUser } = utilsFunctions(props);
 
