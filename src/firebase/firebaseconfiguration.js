@@ -3,12 +3,12 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB1VH5L-Rmj_seu3PqMeaCiNXQKGizW93c",
-  authDomain: "fir-authlabweb-d36b7.firebaseapp.com",
-  projectId: "fir-authlabweb-d36b7",
-  storageBucket: "fir-authlabweb-d36b7.appspot.com",
-  messagingSenderId: "611537457346",
-  appId: "1:611537457346:web:6aa2a0847b9e45f00eab5b"
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_ID
 };
 
 let instance;
