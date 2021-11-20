@@ -7,9 +7,12 @@ import Orders from "../components/Orders";
 import Deposits from "../components/Deposits";
 import { Link } from "react-router-dom";
 
+import Test from "../backend/firebaseCRUD";
+
 export default function DashBoard(params) {
   return (
     <Container maxWidth="lg" sx={{ mt: 15 }}>
+      <Test/>
       <Grid container spacing={3}>
         <div>
           <ul>
