@@ -1,11 +1,11 @@
 import getFirebase from "../firebase/firebaseconfiguration";
-import { getAuth } from "firebase/auth";
 import { 
     getFirestore,
     collection, 
     getDocs, 
     getDoc, 
-    doc
+    doc,
+    updateDoc
 } from "firebase/firestore";
 
 getFirebase();
@@ -40,6 +40,16 @@ function GetRecipe(props) {
     })
 
     return(<br/>);
+}
+
+function UpdateRecipe(props) {
+    const recipeId = props.recipeId;
+    const data = props.data
+    const docRef = doc(db, 'Recipes', recipeId);
+    updateDoc(docRef, {data})
+    .then(() => {
+        console.log("Record Updated")
+    })
 }
 
 export { GetRecipes, GetRecipe };
