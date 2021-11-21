@@ -1,21 +1,23 @@
 import getFirebase from "../firebase/firebaseconfiguration";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { 
+    getFirestore,
+    collection, 
+    getDocs, 
+    getDoc, 
+    doc
+} from "firebase/firestore";
 
-const firebase = getFirebase();
-const auth = getAuth();
+getFirebase();
 const db = getFirestore();
-const collectionRef = collection(db, 'Recipes')
 
-export default function getRecipes() {
-    const user = auth.currentUser.uid;
-    console.log(user);
-    console.log(collectionRef);
+function GetRecipes() { 
+    const collectionRef = collection(db, 'Recipes');
     getDocs(collectionRef)
         .then((snapshot) => {
             let recipes = [];
-            snapshot.docs.forEach((doc) => {
-                recipes.push({...doc.data(), id: doc.id});
+            snapshot.docs.forEach((docu) => {
+                recipes.push({...docu.data(), id: docu.id});
             })
             console.log(recipes);
         })
@@ -26,3 +28,18 @@ export default function getRecipes() {
     return(<br/>);
 }
 
+function GetRecipe(props) {
+    const recipeId = props.recipeId;
+    const docRef = doc(db, 'Recipes', recipeId);
+    getDoc(docRef)
+    .then((snapshot) => {
+        console.log(snapshot.data());
+    })
+    .catch(err => {
+        console.log(err.message);
+    })
+
+    return(<br/>);
+}
+
+export { GetRecipes, GetRecipe };
