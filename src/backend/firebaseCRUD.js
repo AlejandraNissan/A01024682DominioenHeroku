@@ -50,6 +50,8 @@ function UpdateRecipe(props) {
     .then(() => {
         console.log("Record Updated")
     })
+
+    return(<br/>);
 }
 
-export { GetRecipes, GetRecipe };
+export { GetRecipes, GetRecipe, UpdateRecipe };
