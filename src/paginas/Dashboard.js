@@ -13,85 +13,30 @@ export default function DashBoard(params) {
 
   const jsonWithCardStructure = 
   {
-    "Usuarios": {
-      "T4DlguipL4eFQ6WT1Z9DYz9T2hd2": {
-        "recetas": [
+  "Recipes": [
           {
-            "duracion": "45 min",
-            "ingredientes": [
-              "pasta",
-              "jitomate",
-              "cebolla",
-              "ajo"
-            ],
-            "procedimiento": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum, orci quis malesuada suscipit, justo mi sollicitudin erat, nec facilisis arcu ligula id nunc. Integer auctor sem aliquet erat aliquet, quis ultrices nibh consequat. Fusce sed nunc eros. Morbi pulvinar augue eget mi iaculis mollis at eu neque. Nam pharetra aliquet nisl et pellentesque. Cras ac augue diam. Mauris dapibus purus quis facilisis bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "titulo": "Pasta pomodoro"
-          }
-        ]
-      },
-      "ATgd8U10n2bE4lmwfjtvNtPmrth2": {
-        "recetas": [
-          {
-            "duracion": "45 min",
-            "ingredientes": [
-              "pasta",
-              "jitomate",
-              "cebolla",
-              "ajo"
-            ],
-            "procedimiento": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum, orci quis malesuada suscipit, justo mi sollicitudin erat, nec facilisis arcu ligula id nunc. Integer auctor sem aliquet erat aliquet, quis ultrices nibh consequat. Fusce sed nunc eros. Morbi pulvinar augue eget mi iaculis mollis at eu neque. Nam pharetra aliquet nisl et pellentesque. Cras ac augue diam. Mauris dapibus purus quis facilisis bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "titulo": "Pasta pomodoro"
+              "duracion": "45 min",
+              "ingredientes": ["flores", "muchos colores"],
+              "procedimiento": "Nel prro",
+              "titulo": "Pizza de Sandy",
+              "id": "IVMAg8NmhY56cQLMPXcn"
           },
           {
-            "duracion": "50 min",
-            "ingredientes": [
-              "harina",
-              "aceite",
-              "jitomate",
-              "cebolla",
-              "ajo"
-            ],
-            "procedimiento": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum, orci quis malesuada suscipit, justo mi sollicitudin erat, nec facilisis arcu ligula id nunc. Integer auctor sem aliquet erat aliquet, quis ultrices nibh consequat. Fusce sed nunc eros. Morbi pulvinar augue eget mi iaculis mollis at eu neque. Nam pharetra aliquet nisl et pellentesque. Cras ac augue diam. Mauris dapibus purus quis facilisis bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "titulo": "Pizza de Sandy"
+              "duracion": "1 h",
+              "ingredientes": ["flores", "muchos colores"],
+              "procedimiento": "Nel prro",
+              "titulo": "Pizza de Sandy",
+              "id": "IVMAg8NmhY56cQLMPXcn"
           }
-        ]
-      },
-        "iuUCxTVnodgoW5QXZh3ki1iue9M2": {
-        "recetas": [
-          {
-            "duracion": "45 min",
-            "ingredientes": [
-              "pasta",
-              "jitomate",
-              "cebolla",
-              "ajo"
-            ],
-            "procedimiento": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum, orci quis malesuada suscipit, justo mi sollicitudin erat, nec facilisis arcu ligula id nunc. Integer auctor sem aliquet erat aliquet, quis ultrices nibh consequat. Fusce sed nunc eros. Morbi pulvinar augue eget mi iaculis mollis at eu neque. Nam pharetra aliquet nisl et pellentesque. Cras ac augue diam. Mauris dapibus purus quis facilisis bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "titulo": "Pasta pomodoro"
-          },
-          {
-            "duracion": "50 min",
-            "ingredientes": [
-              "harina",
-              "aceite",
-              "jitomate",
-              "cebolla",
-              "ajo"
-            ],
-            "procedimiento": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum, orci quis malesuada suscipit, justo mi sollicitudin erat, nec facilisis arcu ligula id nunc. Integer auctor sem aliquet erat aliquet, quis ultrices nibh consequat. Fusce sed nunc eros. Morbi pulvinar augue eget mi iaculis mollis at eu neque. Nam pharetra aliquet nisl et pellentesque. Cras ac augue diam. Mauris dapibus purus quis facilisis bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "titulo": "Pizza de Sandy"
-          }
-        ]
-      }
-    }
+    ]
   }
 
   let auth = getAuth();
   let myUid = auth.currentUser.uid;
   
-  console.log(jsonWithCardStructure.Usuarios[myUid]);
-  
-  let amountOfRecepies = Object.keys(jsonWithCardStructure.Usuarios.iuUCxTVnodgoW5QXZh3ki1iue9M2.recetas).length;
+  // console.log(jsonWithCardStructure.Usuarios[myUid]);
+
+  // let amountOfRecepies = Object.keys(jsonWithCardStructure.Usuarios.iuUCxTVnodgoW5QXZh3ki1iue9M2.recetas).length;
   return (
     <Container maxWidth="lg" sx={{ mt: 15 }}>
       <Grid container spacing={3}>
@@ -104,13 +49,14 @@ export default function DashBoard(params) {
         </div>
 
         {
-          jsonWithCardStructure.Usuarios.iuUCxTVnodgoW5QXZh3ki1iue9M2.recetas.map((index, i)=>(
+          jsonWithCardStructure.Recipes.map((index, i)=>(
             <Card
               titulo = {index.titulo}
               duracion = {index.duracion}
               ingredientes = {index.ingredientes}
               procedimiento = {index.procedimiento}
               index = {i}
+              cardId = {index.id}
               uid = {myUid}
               >
             </Card>
