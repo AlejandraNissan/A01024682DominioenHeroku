@@ -33,6 +33,8 @@ import Logout from "./Logout";
 import getFirebase from "../firebase/firebaseconfiguration";
 const drawerWidth = 240;
 
+import { GetRecipes, GetRecipe } from "../backend/firebaseCRUD";
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -150,6 +152,10 @@ export default function MiniDrawer(props) {
 
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      <GetRecipes />
+      <GetRecipe
+        recipeId='IVMAg8NmhY56cQLMPXcn'
+      />
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton

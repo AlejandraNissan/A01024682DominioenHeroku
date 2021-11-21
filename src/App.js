@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./styles.css";
 import SignIn from "./paginas/Login";
 import Index  from "./paginas/Index";
-import utilsFunctions from "./funciones/FirebaseFunctions";
+import FirebaseFunctions from "./funciones/FirebaseFunctions";
 
 export default function App(props) {
 
-  const { firebase, currentUser, getCurrentUser } = utilsFunctions(props);
+  const { firebase, currentUser, getCurrentUser } = FirebaseFunctions(props);
 
   useEffect((e) => {
     if (firebase) {
