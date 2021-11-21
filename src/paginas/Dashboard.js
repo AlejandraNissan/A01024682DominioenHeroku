@@ -1,56 +1,42 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Chart from "../components/Chart";
-import Orders from "../components/Orders";
-import Deposits from "../components/Deposits";
-import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import {CreateRecipe} from "../backend/firebaseCRUD"
+
+const thisTitulo="Algo"
+const thisProc="dshfjkshfjkds"
+const thisDuracion="120 min"
 
 export default function DashBoard(params) {
   return (
     <Container maxWidth="lg" sx={{ mt: 15 }}>
-      <Grid container spacing={3}>
-        <div>
-          <ul>
-            <li>
-              <Link to="/logout">logout</Link>
-            </li>
-          </ul>
-        </div>
-        {/* Chart */}
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 240
-            }}
-          >
-            <Chart />
-          </Paper>
-        </Grid>
-        {/* Recent Deposits */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 240
-            }}
-          >
-            <Deposits />
-          </Paper>
-        </Grid>
-        {/* Recent Orders */}
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Orders />
-          </Paper>
-        </Grid>
-      </Grid>
+        <h1>Create a Recipe</h1>
+        <form class='add'>
+            <label for="titulo">Titulo: </label>  
+            <input type="text" name="Titulo" id="Titulo" required></input>
+            <br/>
+            <br/>
+
+            <label for="procedimiento">Procedimiento: </label>  
+            <input type="text" name="Procedimiento" id="Procedimiento" required></input>
+            <br/>
+            <br/>
+
+            <label for="duracion">Duracion: </label>  
+            <input type="text" name="Duracion" id="Duracion" required></input>
+            <br/>
+            <br/>
+
+            <Button color="primary" onClick={() => { 
+                CreateRecipe({
+                    titulo:document.getElementById("Titulo").value,
+                    procedimiento:document.getElementById("Procedimiento").value,
+                    duracion:document.getElementById("Duracion").value
+                }); 
+                console.log('onClick'); }}>
+            Primary
+            </Button>
+        </form>
     </Container>
   );
 }
