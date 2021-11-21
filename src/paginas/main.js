@@ -33,6 +33,8 @@ import Logout from "./Logout";
 import getFirebase from "../firebase/firebaseconfiguration";
 const drawerWidth = 240;
 
+import Test from "../backend/firebaseCRUD";
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -150,6 +152,7 @@ export default function MiniDrawer(props) {
 
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      <Test/>
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
