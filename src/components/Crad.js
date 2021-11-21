@@ -7,17 +7,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export default function MultiActionAreaCard(props) {
 
-    const pruebaJson={
-        "duracion" : "45 min",
-        "ingredientes" : [
-            "pasta",
-            "jitomate",
-            "cebolla",
-            "ajo"
-        ],
-        "procedimiento" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum, orci quis malesuada suscipit, justo mi sollicitudin erat, nec facilisis arcu ligula id nunc. Integer auctor sem aliquet erat aliquet, quis ultrices nibh consequat. Fusce sed nunc eros. Morbi pulvinar augue eget mi iaculis mollis at eu neque. Nam pharetra aliquet nisl et pellentesque. Cras ac augue diam. Mauris dapibus purus quis facilisis bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "titulo" : "Pasta pomodoro"
-      }
+    console.log(props.uid);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -30,17 +20,17 @@ export default function MultiActionAreaCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {pruebaJson.titulo}
+            {props.titulo}
           </Typography>
           <Typography gutterBottom variant="h10" component="div">
-            Duración: {pruebaJson.duracion}
+            Duración: {props.duracion}
           </Typography>          
           <Typography variant="body2" color="text.secondary">
-            Ingredientes: {pruebaJson.ingredientes}
+            Ingredientes: {props.ingredientes}
           </Typography>
           <Typography variant="body3" color="text.secondary">
             Procedimiento:
-            {pruebaJson.procedimiento}
+            {props.procedimiento}
           </Typography>
         </CardContent>
       </CardActionArea>
