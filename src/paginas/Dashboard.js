@@ -1,60 +1,75 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
+
 import Button from '@mui/material/Button';
-import {CreateRecipe, DeleteRecipe} from "../backend/firebaseCRUD"
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Chart from "../components/Chart";
+import Orders from "../components/Orders";
+import Deposits from "../components/Deposits";
+import { Link } from "react-router-dom";
+import Card from "../components/Crad"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from "react";
+import {GetUserRecipes, CreateRecipe, DeleteRecipe} from "../backend/firebaseCRUD"
 
 export default function DashBoard(params) {
+
+  const jsonWithCardStructure = 
+  {
+  "Recipes": [
+          {
+              "duracion": "45 min",
+              "ingredientes": ["flores", "muchos colores"],
+              "procedimiento": "Nel prro",
+              "titulo": "Pizza de Sandy",
+              "id": "IVMAg8NmhY56cQLMPXcn"
+          },
+          {
+              "duracion": "1 h",
+              "ingredientes": ["flores", "muchos colores"],
+              "procedimiento": "Nel prro",
+              "titulo": "Pizza de Sandy",
+              "id": "IVMAg8NmhY56cQLMPXcn"
+          }
+    ]
+  }
+
+  let auth = getAuth();
+  let myUid = auth.currentUser.uid;
+  //let myRecipes = GetRecipes();
+  //let recetas = { "Recipes": myRecipes};
+  console.log("Estoy en dashboard, probando");
+  //console.log(myRecipes);
+
+  // console.log(jsonWithCardStructure.Usuarios[myUid]);
+
+  // let amountOfRecepies = Object.keys(jsonWithCardStructure.Usuarios.iuUCxTVnodgoW5QXZh3ki1iue9M2.recetas).length;
   return (
     <Container maxWidth="lg" sx={{ mt: 15 }}>
-        <h1>Create a Recipe</h1>
-        <form class='add'>
-            <label for="titulo">Titulo: </label>  
-            <input type="text" name="Titulo" id="Titulo" required></input>
-            <br/>
-            <br/>
-
-            <label for="ingredientes">Ingredientes: </label>  
-            <input type="text" name="Ingredientes" id="Ingredientes" required></input>
-            <br/>
-            <br/>
-
-            <label for="procedimiento">Procedimiento: </label>  
-            <input type="text" name="Procedimiento" id="Procedimiento" required></input>
-            <br/>
-            <br/>
-
-            <label for="duracion">Duracion: </label>  
-            <input type="text" name="Duracion" id="Duracion" required></input>
-            <br/>
-            <br/>
-
-            <Button color="primary" onClick={() => { 
-                CreateRecipe({
-                    titulo:document.getElementById("Titulo").value,
-                    ingredientes:document.getElementById("Ingredientes").value,
-                    procedimiento:document.getElementById("Procedimiento").value,
-                    duracion:document.getElementById("Duracion").value
-                }); 
-                console.log('POST successful.'); }}>
-            Primary
-            </Button>
-        </form>
-
-        <h1>Delete a Recipe</h1>
-        <form class='delete'>
-            <label for="id">Titulo: </label>  
-            <input type="text" name="RecipeId" id="RecipeId" required></input>
-            <br/>
-            <br/>
-
-            <Button color="primary" onClick={() => { 
-                DeleteRecipe({
-                    rid:document.getElementById("RecipeId").value,
-                }); 
-                console.log('DELETE successful.'); }}>
-            Delete
-            </Button>
-        </form>
+      <Grid container spacing={3}>
+        <div>
+          <ul>
+            <li>
+              <Link to="/logout">logout</Link>
+            </li>
+          </ul>
+        </div>
+        <GetUserRecipes uid = {myUid}/>
+        {/* {
+          jsonWithCardStructure.Recipes.map((index, i)=>(
+            <Card
+              titulo = {index.titulo}
+              duracion = {index.duracion}
+              ingredientes = {index.ingredientes}
+              procedimiento = {index.procedimiento}
+              index = {i}
+              cardId = {index.id}
+              uid = {myUid}
+              >
+            </Card>
+          ))} */}
+      </Grid>
     </Container>
   );
 }

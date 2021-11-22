@@ -33,6 +33,8 @@ import Logout from "./Logout";
 import getFirebase from "../firebase/firebaseconfiguration";
 const drawerWidth = 240;
 
+import {GetRecipe } from "../backend/firebaseCRUD";
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
