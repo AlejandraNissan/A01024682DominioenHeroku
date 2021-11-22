@@ -28,7 +28,7 @@ export default function MultiActionAreaCard(props) {
                 Duración: {props.duracion}
             </Typography>          
             <Typography variant="body2" color="text.secondary">
-                Ingredientes: {props.ingredientes.join(', ')}
+                Ingredientes: {props.ingredientes}
             </Typography>
             <Typography variant="body3" color="text.secondary">
                 Procedimiento:

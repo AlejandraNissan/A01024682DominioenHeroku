@@ -8,6 +8,8 @@ import Deposits from "../components/Deposits";
 import { Link } from "react-router-dom";
 import Card from "../components/Crad"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState, useEffect } from "react";
+import {GetUserRecipes} from "../backend/firebaseCRUD"
 
 export default function DashBoard(params) {
 
@@ -33,7 +35,11 @@ export default function DashBoard(params) {
 
   let auth = getAuth();
   let myUid = auth.currentUser.uid;
-  
+  //let myRecipes = GetRecipes();
+  //let recetas = { "Recipes": myRecipes};
+  console.log("Estoy en dashboard, probando");
+  //console.log(myRecipes);
+
   // console.log(jsonWithCardStructure.Usuarios[myUid]);
 
   // let amountOfRecepies = Object.keys(jsonWithCardStructure.Usuarios.iuUCxTVnodgoW5QXZh3ki1iue9M2.recetas).length;
@@ -47,8 +53,8 @@ export default function DashBoard(params) {
             </li>
           </ul>
         </div>
-
-        {
+        <GetUserRecipes uid = {myUid}/>
+        {/* {
           jsonWithCardStructure.Recipes.map((index, i)=>(
             <Card
               titulo = {index.titulo}
@@ -60,7 +66,7 @@ export default function DashBoard(params) {
               uid = {myUid}
               >
             </Card>
-          ))}
+          ))} */}
       </Grid>
     </Container>
   );
