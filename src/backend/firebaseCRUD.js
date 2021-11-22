@@ -1,5 +1,8 @@
 import getFirebase from "../firebase/firebaseconfiguration";
+
 import { 
+    getDocs,
+    deleteDoc,
     getFirestore,
     collection, 
     getDocs, 
@@ -15,7 +18,10 @@ import Card from "../components/Crad"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 getFirebase();
+const auth = getAuth();
 const db = getFirestore();
+const collectionRef = collection(db, 'Recipes')
+
 
 function GetRecipes(){
     const [recipe, setRecipes] = useState([]);
@@ -92,6 +98,18 @@ function GetUserRecipes(props){
         </Card>)));
 }
 
+function CreateRecipe(props) {
+    const user = auth.currentUser.uid;
+    addDoc(collectionRef, {
+        titulo:         props.titulo,
+        ingredientes:   props.ingredientes,
+        procedimiento:  props.procedimiento,
+        duracion:       props.duracion,
+        uid:            user
+       });
+    return(<br/>);
+}
+
 function GetRecipe(props) {
     const recipeId = props.recipeId;
     const docRef = doc(db, 'Recipes', recipeId);
@@ -115,7 +133,14 @@ function UpdateRecipe(props) {
         console.log("Record Updated")
     })
 
+    });
     return(<br/>);
 }
 
-export {GetRecipes,GetUserRecipes, GetRecipe, UpdateRecipe };
+async function DeleteRecipe(props) {
+    console.log("Recipe ID: ", props.rid);
+    await deleteDoc(doc(db, 'Recipes', props.rid));
+    return(<br/>);
+}
+
+export {CreateRecipe, DeleteRecipe, GetRecipes, GetUserRecipes, GetRecipe, UpdateRecipe};
