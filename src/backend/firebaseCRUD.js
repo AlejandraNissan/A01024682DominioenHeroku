@@ -1,12 +1,11 @@
 import getFirebase from "../firebase/firebaseconfiguration";
 
 import { 
-    getDocs,
     deleteDoc,
     getFirestore,
     collection, 
-    getDocs, 
     getDoc, 
+    getDocs, 
     doc,
     updateDoc,
     query,
@@ -119,7 +118,7 @@ function GetRecipe(props) {
     })
     .catch(err => {
         console.log(err.message);
-    })
+    });
 
     return(<br/>);
 }
@@ -131,8 +130,6 @@ function UpdateRecipe(props) {
     updateDoc(docRef, {data})
     .then(() => {
         console.log("Record Updated")
-    })
-
     });
     return(<br/>);
 }
