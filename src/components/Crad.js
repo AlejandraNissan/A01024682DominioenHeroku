@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Box from '@material-ui/core/Box';
+import { DeleteRecipe } from '../backend/firebaseCRUD';
 
 export default function MultiActionAreaCard(props) {
 
@@ -17,6 +18,7 @@ export default function MultiActionAreaCard(props) {
             <CardMedia
             component="img"
             height="140"
+            width="100"
             image="https://picsum.photos/200"
             alt="green iguana"
             />
@@ -40,7 +42,11 @@ export default function MultiActionAreaCard(props) {
             <Button size="small" color="primary">
             Edit
             </Button>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={() => { 
+                // TODO: Make refresh method to remove cards from frontend
+                console.log(props.cardId);
+                DeleteRecipe({rid:props.cardId});
+            }} >
             Delete
             </Button>
         </CardActions>

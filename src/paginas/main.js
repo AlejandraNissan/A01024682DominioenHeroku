@@ -31,6 +31,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Dashboard from "./Dashboard";
 import UserDashboard from './UserDashboard';
 import Logout from "./Logout";
+import CreateForm from "./CreateForm";
 import getFirebase from "../firebase/firebaseconfiguration";
 const drawerWidth = 240;
 
@@ -207,6 +208,14 @@ export default function MiniDrawer(props) {
 
             </ListItem>
 
+            <ListItem button key={0} component = {CreateForm} to = "/create-recipe">
+              <ListItemIcon>
+
+                <InboxIcon /> 
+
+              </ListItemIcon>
+              <ListItemText primary={"Create Recipe"} />
+            </ListItem>
 
         </List>
 
@@ -258,6 +267,16 @@ export default function MiniDrawer(props) {
       </Box>
     </Route>
     
+    <Route path={"/create-recipe"}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <CreateForm
+                signOut={signOut}
+                firebase={props.firebase}
+                history={props.history}
+              />
+      </Box>
+    </Route>
 
   </switch>
 
