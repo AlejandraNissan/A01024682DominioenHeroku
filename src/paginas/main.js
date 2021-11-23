@@ -2,10 +2,8 @@ import * as React from 'react';
 
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link,
-  useParams 
+  Link
 } from "react-router-dom";
 
 import { styled, useTheme } from '@mui/material/styles';
@@ -24,16 +22,17 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import BookIcon from '@mui/icons-material/Book';
+import LogoutIcon from '@mui/icons-material/Logout';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import MailIcon from '@mui/icons-material/Mail';
 
 
 import Dashboard from "./Dashboard";
+import UserDashboard from './UserDashboard';
 import Logout from "./Logout";
 import getFirebase from "../firebase/firebaseconfiguration";
 const drawerWidth = 240;
-
-import {GetRecipe } from "../backend/firebaseCRUD";
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -101,8 +100,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer(props) {
-
-    const firebase = getFirebase();
+  
+  const firebase = getFirebase();
     
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -144,7 +143,6 @@ export default function MiniDrawer(props) {
       alert(error.message);
     }
     props.history.push("/");
-    //console.log(props);
   };
 
   return (
@@ -167,7 +165,7 @@ export default function MiniDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            MyHerokuApp
+            Chef Vous!
           </Typography>
         </Toolbar>
       </AppBar>
@@ -181,22 +179,32 @@ export default function MiniDrawer(props) {
         <Divider />
         <List>
 
+            <ListItem button key={0} component = {Link} to = "/userdashboard">
+              <ListItemIcon>
+
+                <BookIcon /> 
+
+              </ListItemIcon>
+              <ListItemText primary={"Your Recipes"} />
+            </ListItem>
+
             <ListItem button key={0} component = {Link} to = "/dashboard">
               <ListItemIcon>
 
-                <InboxIcon /> 
+                <BookmarksIcon /> 
 
               </ListItemIcon>
-              <ListItemText primary={"Dashboard"} />
+              <ListItemText primary={"All Recipes"} />
             </ListItem>
 
             <ListItem button key={0} component = {Link} to = "/logout">
               <ListItemIcon>
 
-                <InboxIcon /> 
+                <LogoutIcon /> 
 
               </ListItemIcon>
               <ListItemText primary={"Logout"} />
+
             </ListItem>
 
 
@@ -221,6 +229,17 @@ export default function MiniDrawer(props) {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Dashboard
+                firebase={props.firebase}
+                signupSubmit={signupSubmit}
+                history={props.history}
+              />
+      </Box>
+    </Route>
+
+    <Route path={"/userdashboard"}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <UserDashboard
                 firebase={props.firebase}
                 signupSubmit={signupSubmit}
                 history={props.history}

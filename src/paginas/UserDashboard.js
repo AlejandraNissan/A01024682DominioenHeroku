@@ -9,15 +9,18 @@ import Orders from "../components/Orders";
 import Deposits from "../components/Deposits";
 import { Link } from "react-router-dom";
 import Card from "../components/Crad"
-import { useState, useEffect } from "react";
-import {GetRecipes, GetUserRecipes, CreateRecipe, DeleteRecipe} from "../backend/firebaseCRUD"
+import { getAuth } from "firebase/auth";
+import {GetUserRecipes, CreateRecipe, DeleteRecipe} from "../backend/firebaseCRUD"
 
-export default function DashBoard(params) {
+export default function UserDashboard(params) {
+
+  let auth = getAuth();
+  let myUid = auth.currentUser.uid;
 
   return (
     <Container maxWidth="lg" sx={{ mt: 15 }}>
       <Grid container spacing={3}>
-        <GetRecipes/>
+        <GetUserRecipes uid={myUid}/>
 
       </Grid>
     </Container>
