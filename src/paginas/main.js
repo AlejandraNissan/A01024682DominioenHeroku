@@ -26,12 +26,14 @@ import BookIcon from '@mui/icons-material/Book';
 import LogoutIcon from '@mui/icons-material/Logout';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import MailIcon from '@mui/icons-material/Mail';
-
+import MoveToInboxIcon from '@mui/icons-material/MoveToInbox';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Dashboard from "./Dashboard";
 import UserDashboard from './UserDashboard';
 import Logout from "./Logout";
 import CreateForm from "./CreateForm";
+import EditForm from "./EditForm";
 import getFirebase from "../firebase/firebaseconfiguration";
 const drawerWidth = 240;
 
@@ -145,6 +147,7 @@ export default function MiniDrawer(props) {
     }
     props.history.push("/");
   };
+    console.log(props.history)
 
   return (
     <Router>
@@ -189,6 +192,16 @@ export default function MiniDrawer(props) {
               <ListItemText primary={"Your Recipes"} />
             </ListItem>
 
+            <ListItem button key={0} component = {Link} to = "/create-recipe">
+              <ListItemIcon>
+
+                <AddCircleIcon /> 
+
+              </ListItemIcon>
+              <ListItemText primary={"Create Recipe"} />
+            </ListItem>
+
+
             <ListItem button key={0} component = {Link} to = "/dashboard">
               <ListItemIcon>
 
@@ -206,15 +219,6 @@ export default function MiniDrawer(props) {
               </ListItemIcon>
               <ListItemText primary={"Logout"} />
 
-            </ListItem>
-
-            <ListItem button key={0} component = {CreateForm} to = "/create-recipe">
-              <ListItemIcon>
-
-                <InboxIcon /> 
-
-              </ListItemIcon>
-              <ListItemText primary={"Create Recipe"} />
             </ListItem>
 
         </List>
@@ -271,7 +275,18 @@ export default function MiniDrawer(props) {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <CreateForm
-                signOut={signOut}
+                signupSubmit={signupSubmit}
+                firebase={props.firebase}
+                history={props.history}
+              />
+      </Box>
+    </Route>
+
+    <Route path={"/edit-recipe"}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <EditForm
+                signupSubmit={signupSubmit}
                 firebase={props.firebase}
                 history={props.history}
               />

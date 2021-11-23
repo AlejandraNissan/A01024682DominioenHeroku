@@ -39,7 +39,10 @@ export default function MultiActionAreaCard(props) {
             </CardContent>
         </CardActionArea>
         <CardActions>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={() => { 
+                console.log(props.cardId);
+                window.location = '/edit-recipe';
+            }} >
             Edit
             </Button>
             <Button size="small" color="primary" onClick={() => { 

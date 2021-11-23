@@ -1,6 +1,7 @@
 import getFirebase from "../firebase/firebaseconfiguration";
 
 import { 
+    addDoc,
     deleteDoc,
     getFirestore,
     collection, 
