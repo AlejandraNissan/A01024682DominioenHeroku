@@ -11,10 +11,9 @@ import {
     query,
     where
 } from "firebase/firestore";
-import { convertCompilerOptionsFromJson } from "typescript";
 import { useState, useEffect } from "react";
 import Card from "../components/Crad"
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 getFirebase();
 const auth = getAuth();
@@ -27,7 +26,6 @@ function GetRecipes(){
 
     useEffect(() => {
         const GetAll = async () => {
-            const collectionRef = collection(db, 'Recipes');
             getDocs(collectionRef)
                 .then((snapshot) => {
                     let recipes = [];
@@ -64,7 +62,6 @@ function GetUserRecipes(props){
 
     useEffect(() => {
         const GetAll = async () => {
-            const collectionRef = collection(db, 'Recipes');
             const q = query(collectionRef, where("uid", "==", props.uid));
             getDocs(q)
                 .then((snapshot) => {
@@ -84,7 +81,7 @@ function GetUserRecipes(props){
     }, []);
 
     return (
-    recipe.map((index, i)=>(
+    recipe.map((index, i) => (
         <Card
           titulo = {index.titulo}
           duracion = {index.duracion}

@@ -36,10 +36,10 @@ export default function App(props) {
   };
 
   return currentUser === "Cargando..." ? (
-    <p> cargando</p>
+    <p>Loading...</p>
   ) : (
     <div className="App">
-      <h1>{currentUser} </h1>
+      <h1>Welcome, Chef {currentUser} </h1>
 
       <Index
         socialLogin={socialLogin}
@@ -47,7 +47,7 @@ export default function App(props) {
         getFirebase={props.getFirebase}
         history={props.history}
       />
-      {process.env.REACT_APP_VAR}
+      {/* {process.env.REACT_APP_VAR} */}
     </div>
   );
 }
