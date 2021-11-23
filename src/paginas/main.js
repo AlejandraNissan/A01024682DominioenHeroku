@@ -24,7 +24,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import BookIcon from '@mui/icons-material/Book';
 import LogoutIcon from '@mui/icons-material/Logout';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import MailIcon from '@mui/icons-material/Mail';
 
