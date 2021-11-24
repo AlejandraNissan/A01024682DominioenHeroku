@@ -83,6 +83,7 @@ export default function Index(props) {
             render={() => (
               <Main
               history={props.history}
+              getFirebase={props.getFirebase}
               />
               
             )}

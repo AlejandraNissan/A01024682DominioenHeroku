@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./styles.css";
 import SignIn from "./paginas/Login";
 import Index  from "./paginas/Index";
+import Main from "./paginas/main";
 import FirebaseFunctions from "./funciones/FirebaseFunctions";
 
 export default function App(props) {
@@ -35,15 +36,20 @@ export default function App(props) {
       });
   };
 
-  return currentUser === "Cargando..." ? (
-    <p>Loading...</p>
+  return currentUser === "Cargando..." || currentUser === null ? (
+      <div>
+          <Index
+            socialLogin={socialLogin}
+            currentUser={currentUser}
+            getFirebase={props.getFirebase}
+            history={props.history}
+          />
+    </div>
   ) : (
     <div className="App">
       <h1>Welcome, Chef {currentUser} </h1>
 
-      <Index
-        socialLogin={socialLogin}
-        currentUser={currentUser}
+      <Main
         getFirebase={props.getFirebase}
         history={props.history}
       />

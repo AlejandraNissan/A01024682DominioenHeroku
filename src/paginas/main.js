@@ -3,7 +3,8 @@ import * as React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from "react-router-dom";
 
 import { styled, useTheme } from '@mui/material/styles';
@@ -236,7 +237,7 @@ export default function MiniDrawer(props) {
      
     </Box>
   
-  <switch>
+  <Switch>
 
     <Route path={"/dashboard"}>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -293,7 +294,7 @@ export default function MiniDrawer(props) {
       </Box>
     </Route>
 
-  </switch>
+  </Switch>
 
     </Router>
   );
