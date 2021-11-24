@@ -14,10 +14,9 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import Card from "../components/Crad"
-import { getAuth } from "firebase/auth";
+import EditForm from "../paginas/EditForm"
 
 getFirebase();
-const auth = getAuth();
 const db = getFirestore();
 const collectionRef = collection(db, 'Recipes')
 
@@ -121,15 +120,31 @@ function GetRecipe(props) {
     return(<br/>);
 }
 
+
+
 function UpdateRecipe(props) {
-    const recipeId = props.recipeId;
-    const data = props.data
-    const docRef = doc(db, 'Recipes', recipeId);
-    updateDoc(docRef, {data})
-    .then(() => {
-        console.log("Record Updated")
-    });
-    return(<br/>);
+    const [recipe, setRecipe] = useState([]);
+    const recipeId = props.rid;
+
+    useEffect(() => {
+        const Update = async () => {
+            const newRecipe= {"titulo": props.titulo, "ingredientes": props.ingredientes, "procedimiento": props.procedimiento, "duracion": props.duracion, "uid": props.uid};
+            const data = props.data
+            const docRef = doc(db, 'Recipes', recipeId);
+            updateDoc(docRef, {newRecipe})
+            .then(() => {
+                console.log("Record Updated")
+                setRecipe(data);
+            });
+            console.log("Props de crud: ", props);
+        }
+    
+        Update();
+    }, []);
+    
+    return(
+        <EditForm titulo={recipe.titulo} ingredientes={recipe.ingredientes} procedimiento={recipe.procedimiento} duracion={recipe.duracion} uid={recipe.uid}></EditForm>
+    );
 }
 
 async function DeleteRecipe(props) {
