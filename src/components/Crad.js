@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Box from '@material-ui/core/Box';
 import { DeleteRecipe } from '../backend/firebaseCRUD';
+import { Link } from "react-router-dom";
 
 export default function MultiActionAreaCard(props) {
 
@@ -39,12 +40,11 @@ export default function MultiActionAreaCard(props) {
             </CardContent>
         </CardActionArea>
         <CardActions>
-            <Button size="small" color="primary" onClick={() => { 
-                console.log(props.cardId);
-                window.location = '/edit-recipe';
-            }} >
+            <Link to="/edit-recipe">
+            <Button size="small" color="primary">
             Edit
             </Button>
+            </Link>
             <Button size="small" color="primary" onClick={() => { 
                 // TODO: Make refresh method to remove cards from frontend
                 console.log(props.cardId);

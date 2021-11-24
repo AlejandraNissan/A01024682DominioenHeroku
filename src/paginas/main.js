@@ -183,7 +183,7 @@ export default function MiniDrawer(props) {
         <Divider />
         <List>
 
-            <ListItem button key={0} component = {Link} to = "/userdashboard">
+            <ListItem button key={0} component={Link} to="/userdashboard">
               <ListItemIcon>
 
                 <BookIcon /> 
@@ -192,7 +192,7 @@ export default function MiniDrawer(props) {
               <ListItemText primary={"Your Recipes"} />
             </ListItem>
 
-            <ListItem button key={0} component = {Link} to = "/create-recipe">
+            <ListItem button key={0} component={Link} to = "/create-recipe">
               <ListItemIcon>
 
                 <AddCircleIcon /> 
@@ -202,7 +202,7 @@ export default function MiniDrawer(props) {
             </ListItem>
 
 
-            <ListItem button key={0} component = {Link} to = "/dashboard">
+            <ListItem button key={0} component={Link} to="/dashboard">
               <ListItemIcon>
 
                 <BookmarksIcon /> 
@@ -211,7 +211,7 @@ export default function MiniDrawer(props) {
               <ListItemText primary={"All Recipes"} />
             </ListItem>
 
-            <ListItem button key={0} component = {Link} to = "/logout">
+            <ListItem button key={0} component={Link} to="/logout">
               <ListItemIcon>
 
                 <LogoutIcon /> 
