@@ -94,14 +94,13 @@ function GetUserRecipes(props){
         </Card>)));
 }
 
-function CreateRecipe(props) {
-    const user = auth.currentUser.uid;
-    addDoc(collectionRef, {
+async function CreateRecipe(props) {
+    await addDoc(collectionRef, {
         titulo:         props.titulo,
         ingredientes:   props.ingredientes,
         procedimiento:  props.procedimiento,
         duracion:       props.duracion,
-        uid:            user
+        uid:            props.uid
        });
     return(<br/>);
 }
@@ -121,31 +120,17 @@ function GetRecipe(props) {
 }
 
 
+async function UpdateRecipe(props) {
+    const recipeId = props.card;
+    const docRef = doc(db, 'Recipes', recipeId);
+    await updateDoc(docRef, {"duracion": props.duracion, "ingredientes": props.ingredientes, "procedimiento": props.procedimiento, "titulo": props.titulo})
+    .then(() => {
+        console.log("Record Updated");
+    })
 
-function UpdateRecipe(props) {
-    const [recipe, setRecipe] = useState([]);
-    const recipeId = props.rid;
-
-    useEffect(() => {
-        const Update = async () => {
-            const newRecipe= {"titulo": props.titulo, "ingredientes": props.ingredientes, "procedimiento": props.procedimiento, "duracion": props.duracion, "uid": props.uid};
-            const data = props.data
-            const docRef = doc(db, 'Recipes', recipeId);
-            updateDoc(docRef, {newRecipe})
-            .then(() => {
-                console.log("Record Updated")
-                setRecipe(data);
-            });
-            console.log("Props de crud: ", props);
-        }
-    
-        Update();
-    }, []);
-    
-    return(
-        <EditForm titulo={recipe.titulo} ingredientes={recipe.ingredientes} procedimiento={recipe.procedimiento} duracion={recipe.duracion} uid={recipe.uid}></EditForm>
-    );
+    return(0);
 }
+
 
 async function DeleteRecipe(props) {
     console.log("Recipe ID: ", props.rid);

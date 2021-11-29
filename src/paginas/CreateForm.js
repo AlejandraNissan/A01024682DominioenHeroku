@@ -3,8 +3,12 @@ import Container from "@mui/material/Container";
 
 import Button from '@mui/material/Button';
 import {CreateRecipe, DeleteRecipe} from "../backend/firebaseCRUD"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function CreateForm() {
+  let auth = getAuth();
+  let myUid = auth.currentUser.uid;
+  console.log("ESTOY EN CREATE FORM, MI UID:", myUid);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 15 }}>
@@ -32,11 +36,12 @@ export default function CreateForm() {
 
             <Button color="primary" onClick={() => { 
                 CreateRecipe({
+                  uid: myUid,
                     titulo:document.getElementById("Titulo").value,
                     ingredientes:document.getElementById("Ingredientes").value,
                     procedimiento:document.getElementById("Procedimiento").value,
                     duracion:document.getElementById("Duracion").value
-                }); 
+                }).then(()=>{location.assign("/")}); 
                 console.log('POST successful.'); }}>
             Primary
             </Button>
