@@ -1,7 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import Logout from "./Logout";
 import SignUp from "./Signup";
 import Login from "./Login";
 import getFirebase from "../firebase/firebaseconfiguration";
@@ -39,14 +37,11 @@ export default function Index(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log(props);
     try {
       if (props) {
-        console.log("iniciando");
         const user = await firebase
           .auth()
           .signInWithEmailAndPassword(data.get("email"), data.get("password"));
-        //console.log("user", user);
         props.history.push("/");
       }
     } catch (error) {
@@ -66,7 +61,6 @@ export default function Index(props) {
             data.get("email"),
             data.get("password")
           );
-        console.log("user", user);
       }
     } catch (error) {
       alert(error.message);

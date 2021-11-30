@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import React, {useEffect } from "react";
 import "./styles.css";
-import SignIn from "./paginas/Login";
 import Index  from "./paginas/Index";
 import Main from "./paginas/main";
 import FirebaseFunctions from "./funciones/FirebaseFunctions";

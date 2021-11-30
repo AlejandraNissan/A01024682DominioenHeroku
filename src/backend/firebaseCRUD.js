@@ -14,10 +14,9 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import Card from "../components/Crad"
-import { getAuth } from "firebase/auth";
+import EditForm from "../paginas/EditForm"
 
 getFirebase();
-const auth = getAuth();
 const db = getFirestore();
 const collectionRef = collection(db, 'Recipes')
 
@@ -53,7 +52,7 @@ function GetRecipes(){
           procedimiento = {index.procedimiento}
           index = {i}
           cardId = {index.id}
-          uid = {"123"}
+          uid = {index.uid}
           >
         </Card>)));
 }
@@ -70,7 +69,6 @@ function GetUserRecipes(props){
                     snapshot.docs.forEach((docu) => {
                         recipes.push({...docu.data(), id: docu.id});
                     })
-                    console.log(recipes);
                     setRecipes(recipes);
                 })
                 .catch(err => {
@@ -90,19 +88,18 @@ function GetUserRecipes(props){
           procedimiento = {index.procedimiento}
           index = {i}
           cardId = {index.id}
-          uid = {"123"}
+          uid = {index.uid}
           >
         </Card>)));
 }
 
-function CreateRecipe(props) {
-    const user = auth.currentUser.uid;
-    addDoc(collectionRef, {
+async function CreateRecipe(props) {
+    await addDoc(collectionRef, {
         titulo:         props.titulo,
         ingredientes:   props.ingredientes,
         procedimiento:  props.procedimiento,
         duracion:       props.duracion,
-        uid:            user
+        uid:            props.uid
        });
     return(<br/>);
 }
@@ -121,16 +118,18 @@ function GetRecipe(props) {
     return(<br/>);
 }
 
-function UpdateRecipe(props) {
-    const recipeId = props.recipeId;
-    const data = props.data
+
+async function UpdateRecipe(props) {
+    const recipeId = props.card;
     const docRef = doc(db, 'Recipes', recipeId);
-    updateDoc(docRef, {data})
+    await updateDoc(docRef, {"duracion": props.duracion, "ingredientes": props.ingredientes, "procedimiento": props.procedimiento, "titulo": props.titulo})
     .then(() => {
-        console.log("Record Updated")
-    });
-    return(<br/>);
+        console.log("Record Updated");
+    })
+
+    return(0);
 }
+
 
 async function DeleteRecipe(props) {
     console.log("Recipe ID: ", props.rid);

@@ -16,7 +16,7 @@ export default function UserDashboard(params) {
 
   let auth = getAuth();
   let myUid = auth.currentUser.uid;
-
+  console.log("mi UID: ", myUid);
   return (
     <Container maxWidth="lg" sx={{ mt: 15 }}>
       <Grid container spacing={3}>

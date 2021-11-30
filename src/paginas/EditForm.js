@@ -16,17 +16,17 @@ export default function EditForm(props) {
             <br/>
 
             <label for="ingredientes">Ingredientes: </label>  
-            <input type="text" name="Ingredientes" id="Ingredientes" required></input>
+            <input type="text" name="Ingredientes" id="Ingredientes" required>props.ingredientes</input>
             <br/>
             <br/>
 
             <label for="procedimiento">Procedimiento: </label>  
-            <input type="text" name="Procedimiento" id="Procedimiento" required></input>
+            <input type="text" name="Procedimiento" id="Procedimiento" required>props.procedimiento</input>
             <br/>
             <br/>
 
             <label for="duracion">Duracion: </label>  
-            <input type="text" name="Duracion" id="Duracion" required></input>
+            <input type="text" name="Duracion" id="Duracion" required>props.duracion</input>
             <br/>
             <br/>
 
