@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { Grid, TextField, FormControl, Pagination, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import { useState, useEffect } from "react";
 import { isPrivateIdentifier } from 'typescript';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function MultiActionAreaCard(props) {
     const [ editDialog, setEditDialog ] = useState(false);
@@ -20,28 +21,32 @@ export default function MultiActionAreaCard(props) {
     const [ productTitulo, setTitulo ] = useState('');
     const [ productUid, setUid ] = useState('');
 
-    console.log(props.uid);
+    let auth = getAuth();
+    let myUid = auth.currentUser.uid;
+
     const openEditDialog = (product) => {
-        console.log(product);
-        setProductToEdit(product);
-        setEditDialog(true);
+
+        if(props.uid == myUid){
+            setProductToEdit(product);
+            setEditDialog(true);
+        }
+        else{
+            alert("¡Solamente puedes editar recetas tuyas!");
+        }
     }
 
     const closeEditDialog = () => {
         setEditDialog(false);
         //let newRecipe = {"duracion": {productDuracion}, "ingredientes": {productIngredientes}, "procedimiento": {productProcedimiento}, "titulo": {productTitulo}, "uid": {productUid}};
-        let cardId = productId;
-        console.log("CRAD JAJA", cardId);
-        console.log("Llego al close");
-        console.log("DURACION: ", productDuracion);
-        let duracionV = productDuracion;
-        let ingredientesV = productIngredientes;
-        let procedimientoV = productProcedimiento;
-        let tituloV = productTitulo;
+        if(productUid == myUid){
+            let cardId = productId;
+            let duracionV = productDuracion;
+            let ingredientesV = productIngredientes;
+            let procedimientoV = productProcedimiento;
+            let tituloV = productTitulo;
 
-        console.log(duracionV);
-        UpdateRecipe({duracion: duracionV, ingredientes: ingredientesV, procedimiento: procedimientoV, titulo: tituloV, card: cardId}).then(()=>{location.assign("/")});
-        console.log("Llego aqui"); 
+            UpdateRecipe({duracion: duracionV, ingredientes: ingredientesV, procedimiento: procedimientoV, titulo: tituloV, card: cardId}).then(()=>{location.assign("/")});
+        }
           
     }
 
@@ -84,11 +89,15 @@ export default function MultiActionAreaCard(props) {
         <CardActions>
             <IconButton color="primary" onClick={() => openEditDialog({dir:props.dir}, {rid:props.cardId}, {uid: props.uid})}>
                     Edit
-            </IconButton>            
+            </IconButton>           
             <Button size="small" color="primary" onClick={() => { 
                 // TODO: Make refresh method to remove cards from frontend
-                console.log(props.cardId);
-                DeleteRecipe({rid:props.cardId}).then(()=>{location.assign("/")});
+                if(props.uid === myUid){
+                    DeleteRecipe({rid:props.cardId}).then(()=>{location.assign("/")});
+                }
+                else{
+                    alert("¡Solamente puedes eliminar recetas tuyas!");
+                }
             }} >
             Delete
             </Button>
@@ -96,23 +105,23 @@ export default function MultiActionAreaCard(props) {
         <Dialog open={editDialog} onClose={closeEditDialog}>
                                 <DialogTitle>Editar Receta</DialogTitle>
                                 <DialogContent>
-                                    <DialogContentText>
-                                        <FormControl>
+                                    <DialogContentText >
+                                        <FormControl sx= {{ p: 2 }}>
                                             <TextField id="product-name" label="Titulo" value=  {"Titulo", productTitulo}onChange={(e) => setTitulo(e.target.value)} />
                                         </FormControl>
                                     </DialogContentText>
                                     <DialogContentText>
-                                        <FormControl>
+                                        <FormControl sx= {{ p: 2 }}>
                                             <TextField id="product-name" label="Duración" value=  {"Duracion", productDuracion}onChange={(e) => setDuracion(e.target.value)} />
                                         </FormControl>
                                     </DialogContentText>
                                     <DialogContentText>
-                                        <FormControl>
+                                        <FormControl sx= {{ p: 2 }}>
                                             <TextField id="product-name" label="Ingredientes" value=  {"Ingredientes", productIngredientes}onChange={(e) => setIngredientes(e.target.value)} />
                                         </FormControl>
                                     </DialogContentText>
                                     <DialogContentText>
-                                        <FormControl>
+                                        <FormControl sx= {{ p: 2 }}>
                                             <TextField id="product-name" label="Procedimiento" value=  {"Procedimiento", productProcedimiento}onChange={(e) => setProcedimiento(e.target.value)} />
                                         </FormControl>
                                     </DialogContentText>

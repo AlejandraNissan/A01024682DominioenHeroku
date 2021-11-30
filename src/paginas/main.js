@@ -26,8 +26,6 @@ import ListItemText from '@mui/material/ListItemText';
 import BookIcon from '@mui/icons-material/Book';
 import LogoutIcon from '@mui/icons-material/Logout';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
-import MailIcon from '@mui/icons-material/Mail';
-import MoveToInboxIcon from '@mui/icons-material/MoveToInbox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Dashboard from "./Dashboard";
@@ -130,7 +128,6 @@ export default function MiniDrawer(props) {
             data.get("email"),
             data.get("password")
           );
-        console.log("user", user);
       }
     } catch (error) {
       alert(error.message);
@@ -148,7 +145,6 @@ export default function MiniDrawer(props) {
     }
     props.history.push("/");
   };
-    console.log(props.history)
 
   return (
     <Router>

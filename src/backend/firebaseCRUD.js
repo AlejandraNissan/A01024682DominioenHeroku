@@ -52,7 +52,7 @@ function GetRecipes(){
           procedimiento = {index.procedimiento}
           index = {i}
           cardId = {index.id}
-          uid = {"123"}
+          uid = {index.uid}
           >
         </Card>)));
 }
@@ -69,7 +69,6 @@ function GetUserRecipes(props){
                     snapshot.docs.forEach((docu) => {
                         recipes.push({...docu.data(), id: docu.id});
                     })
-                    console.log(recipes);
                     setRecipes(recipes);
                 })
                 .catch(err => {
@@ -89,7 +88,7 @@ function GetUserRecipes(props){
           procedimiento = {index.procedimiento}
           index = {i}
           cardId = {index.id}
-          uid = {"123"}
+          uid = {index.uid}
           >
         </Card>)));
 }
